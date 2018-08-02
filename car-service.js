@@ -12,7 +12,7 @@ function CarService() {
     )
   );
 
-  function car(make, model, imgUrl, year, price, description) {
+  function Car(make, model, imgUrl, year, price, description) {
     this.make = make;
     this.model = model;
     this.imgUrl = imgUrl;

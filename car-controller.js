@@ -25,11 +25,11 @@ function CarController() {
   };
 
   function draw() {
-    carService.getCars = carService.getCars();
+    let cars = carService.getCars();
     let template = "";
 
-    for (let i = 0; i < car.length; i++) {
-      const car = car[i];
+    for (let i = 0; i < cars.length; i++) {
+      const car = cars[i];
       template += `
         <div class="col-3">
             <p>${car.make}</p>

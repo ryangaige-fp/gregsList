@@ -26,7 +26,7 @@ function JobController() {
     jobService.getjobs = jobService.getJobs();
     let template = "";
 
-    for (let i = 0; i < job.length; i++) {
+    for (let i = 0; i < jobs.length; i++) {
       const job = job[i];
       template += `
       <div class="col-3">

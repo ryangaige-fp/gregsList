@@ -34,7 +34,7 @@ function CarController() {
         <div class="col-3">
             <p>${car.make}</p>
             <p>${car.model}</p>
-            <img src="${car.make}"></img>
+            <img src="${car.imgUrl}"></img>
             <p>${car.year}</p>
             <p>${car.price}</p>
             <p>${car.description}</p>

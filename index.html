@@ -13,14 +13,18 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-dark bg-primary">
+    </nav>
     <h1>Gregs List</h1>
+
     <button onclick="app.controllers.carController.setup()">Cars</button>
     <button onclick="app.controllers.jobController.setup()">Jobs</button>
     <button onclick="app.controllers.houseController.setup()">Houses</button>
 
 
 
-    <div id="maker">
+    <div name="maker">
 
     </div>
 
@@ -29,15 +33,12 @@
 
 
 
-
-
-
-
-
-    <!-- need to call in the job javascript files. -->
-
+    <script src="job-service.js"></script>
     <script src="car-service.js"></script>
+    <script src="house-service.js"></script>
+    <script src="job-controller.js"></script>
     <script src="car-controller.js"></script>
+    <script src="house-controller.js"></script>
     <script src="app.js"></script>
 
 

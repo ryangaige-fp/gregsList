@@ -1,7 +1,17 @@
 function JobService() {
   let jobs = [];
 
-  function job(company, jobTitle, hours, rate, description) {
+  jobs.push(
+    new Job(
+      "fencepencil",
+      "Sr. Developer",
+      40,
+      170000,
+      "fun place to work with awesome benefits"
+    )
+  );
+
+  function Job(company, jobTitle, hours, rate, description) {
     this.company = company;
     this.jobTitle = jobTitle;
     this.hours = hours;
@@ -9,7 +19,7 @@ function JobService() {
     this.description = description;
   }
 
-  this.getjobs = function() {
+  this.getJobs = function() {
     let jobsCopy = [];
 
     for (let i = 0; i < jobs.length; i++) {
@@ -24,6 +34,18 @@ function JobService() {
       );
       jobsCopy.push(jobCopy);
     }
+    return jobsCopy;
   };
-  return jobsCopy;
+
+  this.makeJob = function(data) {
+    jobs.push(
+      new JobService(
+        data.company.value,
+        data.jobTitle.value,
+        data.hours.value,
+        data.rate.value,
+        data.description.value
+      )
+    );
+  };
 }

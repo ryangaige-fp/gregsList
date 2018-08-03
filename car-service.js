@@ -5,7 +5,7 @@ function CarService() {
     new Car(
       "Ford",
       "F150",
-      "https://ford.to/2mBGH2b",
+      "/assets/Photos/cq5dam.web.1280.1280.jpg",
       2019,
       30000,
       "A Truck for hauling your friends stuff"

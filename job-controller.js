@@ -23,11 +23,11 @@ function JobController() {
   };
 
   function draw() {
-    jobService.getjobs = jobService.getJobs();
+    let jobs = jobService.getJobs();
     let template = "";
 
     for (let i = 0; i < jobs.length; i++) {
-      const job = job[i];
+      const job = jobs[i];
       template += `
       <div class="col-3">
         <p>${job.company}</p>
@@ -43,4 +43,15 @@ function JobController() {
     }
     document.getElementById("jobs").innerHTML = template;
   }
+  this.makeJob = function(event) {
+    event.preventDefault();
+    let formData = event.target;
+    jobService.makeJob(formData);
+    formData.company.value = "";
+    formData.jobTitle.value = "";
+    formData.hours.value = "";
+    formData.rate.value = "";
+    formData.description.value = "";
+    draw();
+  };
 }

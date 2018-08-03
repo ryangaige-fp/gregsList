@@ -41,6 +41,7 @@ function HouseController() {
 
             <button type="submit" class="btn btn-primary">Make House</button>
         </form>
+        <div id="houses" class="row"></div>
     </div>
 
 `;
@@ -64,11 +65,23 @@ function HouseController() {
         <p>${house.year}</p>
         <p>${house.price}</p>
         <p>${house.description}</p>
-
         </div>  
-
       `;
     }
     document.getElementById("houses").innerHTML = template;
   }
+
+  this.makeHouse = function(event) {
+    event.preventDefault();
+    let formData = event.target;
+    houseService.makeHouse(formData);
+    formData.bedrooms.value = "";
+    formData.bathrooms.value = "";
+    formData.imgUrl.value = "";
+    formData.levels.value = "";
+    formData.year.value = "";
+    formData.price.value = "";
+    formData.description.value = "";
+    draw();
+  };
 }

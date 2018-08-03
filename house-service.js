@@ -1,5 +1,17 @@
 function HouseService() {
-  let house = [];
+  let houses = [];
+
+  houses.push(
+    new House(
+      4,
+      2,
+      "/assets/Photos/cq5dam.web.1280.1280.jpg",
+      2,
+      2018,
+      200000,
+      "huge house tiny rooms"
+    )
+  );
 
   function House(
     bedrooms,
@@ -39,9 +51,17 @@ function HouseService() {
     return housesCopy;
   };
 
-
-this.makeHouse = function (data)
-  houses.push (new House)
-
-
+  this.makeHouse = function(data) {
+    houses.push(
+      new HouseService(
+        data.bedrooms.value,
+        data.bathrooms.value,
+        data.imgUrl.value,
+        data.levels.value,
+        data.year.value,
+        data.price.value,
+        data.description.value
+      )
+    );
+  };
 }

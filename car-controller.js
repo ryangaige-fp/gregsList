@@ -38,8 +38,6 @@ function CarController() {
             <p>${car.year}</p>
             <p>${car.price}</p>
             <p>${car.description}</p>
-
-
         </div>  
       `;
     }

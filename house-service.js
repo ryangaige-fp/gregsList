@@ -31,7 +31,7 @@ function HouseService() {
     this.description = description;
   }
 
-  this.getHouses = function() {
+  this.getHouse = function() {
     let housesCopy = [];
 
     for (let i = 0; i < houses.length; i++) {

@@ -2,3 +2,12 @@ img {
   height: 150px;
   width: 150px;
 }
+
+.headerStyle {
+  color: white;
+}
+
+.carImg {
+  height: 16rem;
+  width: 16rem;
+}

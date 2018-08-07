@@ -53,7 +53,7 @@ function HouseService() {
 
   this.makeHouse = function(data) {
     houses.push(
-      new HouseService(
+      new House(
         data.bedrooms.value,
         data.bathrooms.value,
         data.imgUrl.value,

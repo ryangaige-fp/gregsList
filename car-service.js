@@ -42,7 +42,7 @@ function CarService() {
 
   this.makeCar = function(data) {
     cars.push(
-      new CarService(
+      new Car(
         data.make.value,
         data.model.value,
         data.imgUrl.value,

@@ -39,7 +39,7 @@ function JobService() {
 
   this.makeJob = function(data) {
     jobs.push(
-      new JobService(
+      new Job(
         data.company.value,
         data.jobTitle.value,
         data.hours.value,

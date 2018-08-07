@@ -3,16 +3,16 @@ function HouseController() {
 
   this.setup = function() {
     let template = `
-<div class="container">
+<div class="container-fluid">
         <form onsubmit="app.controllers.houseController.makeHouse(event)">
-            <div class="form-row">
+            <div class="form-row pt-4 pb-4">
                 <div class="form-group col-md-3">
                     <label for="bedrooms">Bedrooms</label>
                     <input type="number" class="form-control" name="bedrooms" placeholder="# of Bedrooms">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="bathoroms">Bathrooms</label>
-                    <input type="number" class="form-control" name="bathoroms" placeholder="# of Bathrooms">
+                    <input type="number" class="form-control" name="bathrooms" placeholder="# of Bathrooms">
                 </div>
             </div>
             <div class="form-group">
@@ -30,11 +30,11 @@ function HouseController() {
                 </div>
                 <div class="form-group col-md-3">
                     <label for="price">Price</label>
-                    <input type="number" class="form-control" name="year" placeholder="Price">
+                    <input type="number" class="form-control" name="price" placeholder="Price">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="description">Description</label>
-                    <input type="number" class="form-control" name="description" placeholder="description">
+                    <input type="text" class="form-control" name="description" placeholder="description">
                 </div>
 
             </div>

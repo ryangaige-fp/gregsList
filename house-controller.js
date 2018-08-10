@@ -3,7 +3,7 @@ function HouseController() {
 
   this.setup = function() {
     let template = `
-<div class="container-fluid">
+ <div class="container">
         <form onsubmit="app.controllers.houseController.makeHouse(event)">
             <div class="form-row pt-4 pb-4">
                 <div class="form-group col-md-3">
@@ -14,16 +14,16 @@ function HouseController() {
                     <label for="bathoroms">Bathrooms</label>
                     <input type="number" class="form-control" name="bathrooms" placeholder="# of Bathrooms">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="imgUrl">Image</label>
-                <input type="text" class="form-control" name="imgUrl" placeholder="image url">
-            </div>
-            <div class="form-group">
-                <label for="levels">Levels</label>
-                <input type="number" class="form-control" name="levels" placeholder="# of levels">
-            </div>
-            <div class="form-row">
+
+                <div class="form-group col-md-3">
+                    <label for="imgUrl ">Image</label>
+                    <input type="text " class="form-control " name="imgUrl" placeholder="image url ">
+                </div>
+                <div class="form-group col-md-3 ">
+                    <label for="levels">Levels</label>
+                    <input type="number" class="form-control" name="levels" placeholder="# of levels">
+                </div>
+
                 <div class="form-group col-md-3">
                     <label for="year">Year Built</label>
                     <input type="number" class="form-control" name="year" placeholder="year built">
@@ -36,17 +36,17 @@ function HouseController() {
                     <label for="description">Description</label>
                     <input type="text" class="form-control" name="description" placeholder="description">
                 </div>
+                </div>
 
-            </div>
-
-            <button type="submit" class="btn btn-primary">Make House</button>
+                <button type="submit" class="btn btn-primary">Make House</button>
         </form>
+
         <div id="houses" class="row"></div>
-    </div>
+</div>
 
 `;
     document.getElementById("maker").innerHTML = template;
-    draw();
+    houseService.loadHouses(draw);
   };
 
   function draw() {
@@ -58,13 +58,13 @@ function HouseController() {
 
       template += `
       <div class="col-3">
-        <p>${house.bedrooms}</p>
-        <p>${house.bathrooms}</p>
-        <img src="${house.imgUrl}"></img> 
-        <p>${house.levels}</p>
-        <p>${house.year}</p>
-        <p>${house.price}</p>
-        <p>${house.description}</p>
+      <img src="${house.imgUrl}"></img> 
+        <p>Bedrooms: ${house.bedrooms}</p>
+        <p>Bathrooms: ${house.bathrooms}</p>
+        <p>Levels: ${house.levels}</p>
+        <p>Year: ${house.year}</p>
+        <p>Price: ${house.price}</p>
+        <p>Desc: ${house.description}</p>
         </div>  
       `;
     }
@@ -74,14 +74,14 @@ function HouseController() {
   this.makeHouse = function(event) {
     event.preventDefault();
     let formData = event.target;
-    houseService.makeHouse(formData);
-    formData.bedrooms.value = "";
-    formData.bathrooms.value = "";
-    formData.imgUrl.value = "";
-    formData.levels.value = "";
-    formData.year.value = "";
-    formData.price.value = "";
-    formData.description.value = "";
-    draw();
+    houseService.makeHouse(formData, draw);
+    // formData.bedrooms.value = "";
+    // formData.bathrooms.value = "";
+    // formData.imgUrl.value = "";
+    // formData.levels.value = "";
+    // formData.year.value = "";
+    // formData.price.value = "";
+    // formData.description.value = "";
+    formData.reset();
   };
 }

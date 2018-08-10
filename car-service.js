@@ -1,16 +1,18 @@
 function CarService() {
+  let carService = this;
+
   let cars = [];
 
-  cars.push(
-    new Car(
-      "Ford",
-      "F150",
-      "/assets/Photos/cq5dam.web.1280.1280.jpg",
-      2019,
-      30000,
-      "A Truck for hauling your friends stuff"
-    )
-  );
+  // cars.push(
+  //   new Car(
+  //     "Ford",
+  //     "F150",
+  //     "/assets/Photos/cq5dam.web.1280.1280.jpg",
+  //     2019,
+  //     30000,
+  //     "A Truck for hauling your friends stuff"
+  //   )
+  // );
 
   function Car(make, model, imgUrl, year, price, description) {
     this.make = make;
@@ -40,16 +42,25 @@ function CarService() {
     return carsCopy;
   };
 
-  this.makeCar = function(data) {
-    cars.push(
-      new Car(
-        data.make.value,
-        data.model.value,
-        data.imgUrl.value,
-        data.year.value,
-        data.price.value,
-        data.description.value
-      )
+  this.loadCars = function(draw) {
+    $.get("https://bcw-gregslist.herokuapp.com/api/cars").then(res => {
+      cars = res.data;
+      draw();
+    });
+  };
+
+  this.makeCar = function(data, draw) {
+    let newCar = new Car(
+      data.make.value,
+      data.model.value,
+      data.imgUrl.value,
+      data.year.value,
+      data.price.value,
+      data.description.value
     );
+    $.post("https://bcw-gregslist.herokuapp.com/api/cars", newCar).then(res => {
+      console.log(res);
+      carService.loadCars(draw);
+    });
   };
 }

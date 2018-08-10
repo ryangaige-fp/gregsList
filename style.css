@@ -11,3 +11,7 @@ img {
   height: 16rem;
   width: 16rem;
 }
+
+.col-3 {
+  padding-top: 2rem;
+}

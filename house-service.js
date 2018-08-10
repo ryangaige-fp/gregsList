@@ -1,17 +1,19 @@
 function HouseService() {
+  let houseService = this;
+
   let houses = [];
 
-  houses.push(
-    new House(
-      4,
-      2,
-      "/assets/Photos/cq5dam.web.1280.1280.jpg",
-      2,
-      2018,
-      200000,
-      "huge house tiny rooms"
-    )
-  );
+  // houses.push(
+  //   new House(
+  //     4,
+  //     2,
+  //     "/assets/Photos/cq5dam.web.1280.1280.jpg",
+  //     2,
+  //     2018,
+  //     200000,
+  //     "huge house tiny rooms"
+  //   )
+  // );
 
   function House(
     bedrooms,
@@ -51,17 +53,29 @@ function HouseService() {
     return housesCopy;
   };
 
-  this.makeHouse = function(data) {
-    houses.push(
-      new House(
-        data.bedrooms.value,
-        data.bathrooms.value,
-        data.imgUrl.value,
-        data.levels.value,
-        data.year.value,
-        data.price.value,
-        data.description.value
-      )
+  this.loadHouses = function(draw) {
+    $.get("https://bcw-gregslist.herokuapp.com/api/houses").then(res => {
+      houses = res.data;
+      draw();
+    });
+  };
+
+  this.makeHouse = function(data, draw) {
+    let newHouse = new House(
+      data.bedrooms.value,
+      data.bathrooms.value,
+      data.imgUrl.value,
+      data.levels.value,
+      data.year.value,
+      data.price.value,
+      data.description.value
+    );
+
+    $.post("https://bcw-gregslist.herokuapp.com/api/houses", newHouse).then(
+      res => {
+        console.log(res);
+        houseService.loadHouses(draw);
+      }
     );
   };
 }

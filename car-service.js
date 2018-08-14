@@ -14,13 +14,14 @@ function CarService() {
   //   )
   // );
 
-  function Car(make, model, imgUrl, year, price, description) {
+  function Car(make, model, imgUrl, year, price, description, id) {
     this.make = make;
     this.model = model;
     this.imgUrl = imgUrl;
     this.year = year;
     this.price = price;
     this.description = description;
+    this._id = id;
   }
 
   this.getCars = function() {
@@ -35,7 +36,8 @@ function CarService() {
         car.imgUrl,
         car.year,
         car.price,
-        car.description
+        car.description,
+        car._id
       );
       carsCopy.push(carCopy);
     }
@@ -43,10 +45,63 @@ function CarService() {
   };
 
   this.loadCars = function(draw) {
-    $.get("https://bcw-gregslist.herokuapp.com/api/cars").then(res => {
-      cars = res.data;
-      draw();
+    $.get("https://bcw-gregslist.herokuapp.com/api/cars")
+      .then(res => {
+        cars = res.data;
+        draw();
+      })
+      .catch(err => {
+        console.error(err.responseJSON.message);
+      });
+  };
+
+  this.getCar = function(id) {
+    let car = {};
+    cars.forEach(currentCar => {
+      if (currentCar._id == id) {
+        car = currentCar;
+      }
     });
+    return car;
+  };
+
+  this.editCar = function(formData, draw) {
+    let editedCar = new Car(
+      formData.make.value,
+      formData.model.value,
+      formData.imgUrl.value,
+      formData.year.value,
+      formData.price.value,
+      formData.description.value,
+      formData.id.value
+    );
+
+    $.ajax({
+      url: "https://bcw-gregslist.herokuapp.com/api/cars/" + editedCar._id,
+      method: "PUT",
+      data: editedCar
+    })
+      .then(res => {
+        console.log(res);
+        this.loadCars(draw);
+      })
+      .catch(err => {
+        console.error(err.responseJSON.message);
+      });
+  };
+
+  this.deleteCar = function(id, draw) {
+    $.ajax({
+      url: "https://bcw-gregslist.herokuapp.com/api/cars/" + id,
+      method: "DELETE"
+    })
+      .then(res => {
+        console.log(res);
+        this.loadCars(draw);
+      })
+      .catch(err => {
+        console.error(err.responseJSON.message);
+      });
   };
 
   this.makeCar = function(data, draw) {
@@ -58,9 +113,16 @@ function CarService() {
       data.price.value,
       data.description.value
     );
-    $.post("https://bcw-gregslist.herokuapp.com/api/cars", newCar).then(res => {
-      console.log(res);
-      carService.loadCars(draw);
-    });
+
+    delete newCar._id;
+
+    $.post("https://bcw-gregslist.herokuapp.com/api/cars", newCar)
+      .then(res => {
+        console.log(res);
+        carService.loadCars(draw);
+      })
+      .catch(err => {
+        console.error(err.responseJSON.message);
+      });
   };
 }

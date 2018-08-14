@@ -10,28 +10,28 @@ function CarController() {
 
              <div class="form-group col-md-3">
                     <label for="imgUrl">Image Url</label>
-                    <input type="text" class="form-control" name="imgUrl" placeholder="Image Url">
+                    <input type="text" class="form-control" name="imgUrl" placeholder="Image Url" >
                 </div>
                 <div class="form-group col-md-3">
                     <label for="make">Make</label>
-                    <input type="text" class="form-control" name="make" placeholder="Make">
+                    <input type="text" class="form-control" name="make" placeholder="Make" >
                 </div>
                 <div class="form-group col-md-3">
                     <label for="model">Model</label>
-                    <input type="text" class="form-control" name="model" placeholder="Model">
+                    <input type="text" class="form-control" name="model" placeholder="Model" >
                 </div>        
                 <div class="form-group col-md-3">
                     <label for="year">Year</label>
-                    <input type="number" class="form-control" name="year" placeholder="Year">
+                    <input type="number" class="form-control" name="year" placeholder="Year" >
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="price">Price</label>
-                    <input type="number" class="form-control" name="price" placeholder="Price">
+                    <input type="number" class="form-control" name="price" placeholder="Price" >
                 </div>
                 <div class="form-group col-md-3">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" name="description" placeholder="description">
+                    <input type="text" class="form-control" name="description" placeholder="description" >
                 </div>
             </div>
       
@@ -43,6 +43,73 @@ function CarController() {
     `;
     document.getElementById("maker").innerHTML = template;
     carService.loadCars(draw);
+  };
+
+  this.drawEditForm = function(id) {
+    let car = carService.getCar(id);
+    let template = `
+     <form onsubmit="app.controllers.carController.editCar(event)">
+            <div class="form-row pt-4 pb-9">
+
+             <div class="form-group col-md-3">
+                    <label for="imgUrl">Image Url</label>
+                    <input type="text" class="form-control" name="imgUrl" placeholder="Image Url" value="${
+                      car.imgUrl
+                    }">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="make">Make</label>
+                    <input type="text" class="form-control" name="make" placeholder="Make" value="${
+                      car.make
+                    }">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" name="model" placeholder="Model" value="${
+                      car.model
+                    }">
+                </div>        
+                <div class="form-group col-md-3">
+                    <label for="year">Year</label>
+                    <input type="number" class="form-control" name="year" placeholder="Year" value="${
+                      car.year
+                    }">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" name="price" placeholder="Price" value="${
+                      car.price
+                    }">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" name="description" placeholder="description" value="${
+                      car.description
+                    }">
+                </div>
+                <div>
+                <input type="text" class="form-control" name="description" placeholder="description" value="${
+                  car._id
+                }" hidden>
+                    </div>
+
+            </div>
+      
+        
+            <button type="submit" class="btn btn-primary">Edit Car</button>
+        </form >
+        `;
+
+    document.getElementById("edit").innerHTML = template;
+  };
+
+  this.editCar = function(event) {
+    event.preventDefault();
+    let formData = event.target;
+    carService.editCar(formData, draw);
+    formData.reset();
+    document.getElementById("edit").innerHTML = "";
   };
 
   function draw() {
@@ -59,11 +126,21 @@ function CarController() {
             <p>Year: ${car.year}</p>
             <p>Price: ${car.price}</p>
             <p>Desc. ${car.description}</p>
+            <button onclick="app.controllers.carController.drawEditForm('${
+              car._id
+            }')">Edit</button>
+            <button onclick="app.controllers.carController.deleteCar('${
+              car._id
+            }')">Delete</button>
         </div>  
       `;
     }
     document.getElementById("cars").innerHTML = template;
   }
+
+  this.deleteCar = function(id) {
+    carService.deleteCar(id, draw);
+  };
 
   this.makeCar = function(event) {
     event.preventDefault();

@@ -89,7 +89,7 @@ function CarController() {
                     }">
                 </div>
                 <div>
-                <input type="text" class="form-control" name="description" placeholder="description" value="${
+                <input type="text" class="form-control" name="id" placeholder="id" value="${
                   car._id
                 }" hidden>
                     </div>

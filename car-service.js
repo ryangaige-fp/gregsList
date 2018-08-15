@@ -14,14 +14,13 @@ function CarService() {
   //   )
   // );
 
-  function Car(make, model, imgUrl, year, price, description, id) {
+  function Car(make, model, imgUrl, year, price, description) {
     this.make = make;
     this.model = model;
     this.imgUrl = imgUrl;
     this.year = year;
     this.price = price;
     this.description = description;
-    this._id = id;
   }
 
   this.getCars = function() {
@@ -30,15 +29,15 @@ function CarService() {
     for (let i = 0; i < cars.length; i++) {
       const car = cars[i];
 
-      let carCopy = new Car(
-        car.make,
-        car.model,
-        car.imgUrl,
-        car.year,
-        car.price,
-        car.description,
-        car._id
-      );
+      let carCopy = {
+        make: car.make,
+        model: car.model,
+        imgUrl: car.imgUrl,
+        year: car.year,
+        price: car.price,
+        description: car.description,
+        _id: car._id
+      };
       carsCopy.push(carCopy);
     }
     return carsCopy;
@@ -72,12 +71,11 @@ function CarService() {
       formData.imgUrl.value,
       formData.year.value,
       formData.price.value,
-      formData.description.value,
-      formData.id.value
+      formData.description.value
     );
 
     $.ajax({
-      url: "https://bcw-gregslist.herokuapp.com/api/cars/" + editedCar._id,
+      url: "https://bcw-gregslist.herokuapp.com/api/cars/" + formData.id.value,
       method: "PUT",
       data: editedCar
     })
